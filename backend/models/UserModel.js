@@ -1,9 +1,11 @@
-// Here we will define the schema for the user model
-const {Schema, model} = require('../connection');
+const {Schema,model } = require('../connection');  //importing moongoose but instead of mongoose i imported its predifine keys
 
-const myschema = new Schema({
-    username : String,
-    email : String,
+const schema = new Schema({
+    username: String,
+    email: String,
+    password: String,
+    websiteName: String,
+    createdAt:Date,
 });
 
-module.exports = model('usercollection', myschema);
+module.exports= model("users", schema);

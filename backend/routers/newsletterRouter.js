@@ -1,8 +1,8 @@
 const express= require("express");
 const router = express.Router();
-const Model = require("../models/usermodel");
+const Model = require("../models/Newslettermodel");
 
-router.post("/news",(req,res)=>{
+router.post("/form",(req,res)=>{
     const formdata = req.body;
     console.log(req.body);
     // res.send("request processed in user router");
@@ -13,7 +13,7 @@ router.post("/news",(req,res)=>{
     .then((result) => {
         console.log("data saved");
         res.json(result);
-    }).catch((err) => {       
+    }).catch((err) => {
         console.error("error");
         res.json(err);
     });
@@ -31,26 +31,6 @@ router.get("/getall", (req, res) => {
       res.json(err);
     });
 });
-
-// for login page
-router.post( '/authenticate', (req, res) => {
-  const formdata = req.body;
-
-  // to find the first entry 
-  Model.findOne({email : formdata.email, password : formdata.password})
-  .then((userdata) => {
-    if(userdata){
-      console.log('login success');
-      res.status(200).json(userdata);
-    }else{
-      console.log('login failed');
-      res.status(300).json({loginStatus : false})
-    }
-  }).catch((err) => {
-    console.error(err);
-    res.json(err);
-  });
-})
 
 
 

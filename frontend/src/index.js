@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Preview from './components/Preview';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const rootElemment = document.getElementById('root');
+// console.log(document.getElementById('root'));
+if(rootElemment){
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
+const preview = ReactDOM.createRoot(document.getElementById('preview'));
+const key = document.getElementById('preview').getAttribute('owner-id');
+console.log(key);
+preview.render(
   <React.StrictMode>
-    <App />
+    <Preview ownerkey={key}/>
   </React.StrictMode>
 );
 
