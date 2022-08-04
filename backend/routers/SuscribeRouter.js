@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Model = require("../models/SubscribeModal");
+const Model = require("../models/SubscribeModel");
 
 router.post("/sscrib",(req,res)=>{
     const data = req.body;

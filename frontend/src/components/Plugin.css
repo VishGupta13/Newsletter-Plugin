@@ -1,0 +1,81 @@
+*{
+    font-family: Montserrat;
+
+}
+body{
+    
+    /* background:linear-gradient( #FFE25A,#FFA852); */
+    
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+    overflow: hidden;
+    background-attachment: fixed;
+}
+.mycard{
+    
+    width: 40%;
+    margin: 10% auto;
+    padding: 5%;
+    box-sizing: border-box;
+    border-radius: 15px;
+    /* box-shadow: 2px 2px 5px 0 rgba(230, 223, 223, 0.5); */
+    /* background: url(https://cutewallpaper.org/21/bat-phone-wallpaper/White-Batman-Logo-Iphone-Wallpaper-Sopotstyle.xyz.jpg); */
+    background-size: cover;
+    background-position: center;
+    height: 48vh;
+    background-color: rgba(0, 0, 0, 0.658);
+    
+    
+
+}
+.myinput,.mybtn{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4%;
+    border-radius: 5px;
+    border: none;
+}
+.myinput{
+    margin-bottom: 20px;
+    background-color: rgba(243, 248, 253, 0.893);
+    /* background: rgb(241, 235, 217); */
+    /* border-bottom: 3px solid rgb(0, 0, 0); */
+    /* margin-top: 10px; */
+    /* border: 2px solid black; */
+    
+
+}
+.mybtn{
+    margin-top: 40px;
+    background-color: rgb(13, 122, 129);
+    color: white;
+    border: none;
+}
+image{
+    width:50%;
+    padding: 4%;
+    top: auto;
+}
+.logo{
+    display: block;
+    width: 100px;
+    margin: auto;
+    box-shadow: 2px 2px 5px 0 black;
+    margin-top: -175px;
+    border-radius: 100%;
+
+}
+.formtitle{
+    text-align: center;
+    font-size: 2em;
+    color: black;
+    margin-top: 50px;
+}
+.t{
+    color: rgb(39, 122, 254);
+    font-weight: 600;
+}
+.t1{
+    color: white;
+}

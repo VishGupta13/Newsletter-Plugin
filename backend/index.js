@@ -29,15 +29,19 @@ const userRouter = require('./routers/UserRouter.js');
 
 const cors = require("cors");
 // to allow frontend to access the backend 
+
 app.use(cors({origin : "http://localhost:3000"}));
 // to parse json data
 app.use(express.json());
 
 // middlewares - to intercept the request
 app.use('/user', userRouter);
+app.use('/subs',subsRouter);
+app.use('/news',newsletterRouter);
+
 
 app.get( '/home', (req, res) => { 
-    res.send('Hello Express!');
+    res.send('Hello DuniyaWalo');
 })
 
  httpServer.listen(port, () => {

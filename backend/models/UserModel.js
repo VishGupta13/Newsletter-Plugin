@@ -1,11 +1,11 @@
-const {Schema,model } = require('../connection');  //importing moongoose but instead of mongoose i imported its predifine keys
+// signup form    
+const {Schema, model} = require('../connection');
 
-const schema = new Schema({
-    username: String,
-    email: String,
-    password: String,
-    websiteName: String,
-    createdAt:Date,
+const myschema = new Schema({
+    firstname:String,
+    lastname:String,
+    email:String,
+    password:String,
 });
 
-module.exports= model("users", schema);
+module.exports = model('users',myschema);

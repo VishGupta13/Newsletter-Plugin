@@ -3,26 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Preview from './components/Preview';
+import Plugin from './components/Plugin';
 
-const rootElemment = document.getElementById('root');
-// console.log(document.getElementById('root'));
-if(rootElemment){
-  const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-}
-const preview = ReactDOM.createRoot(document.getElementById('preview'));
-const key = document.getElementById('preview').getAttribute('owner-id');
-console.log(key);
-preview.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
-    <Preview ownerkey={key}/>
+    <App />
   </React.StrictMode>
 );
+
+const pluginEle = document.getElementById('plugin');
+
+if(pluginEle){
+  const pl = ReactDOM.createRoot(pluginEle);
+  pl.render(
+    
+<Plugin />  )
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

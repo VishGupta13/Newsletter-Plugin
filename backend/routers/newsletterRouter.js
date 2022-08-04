@@ -1,37 +1,93 @@
-const express= require("express");
-const router = express.Router();
-const Model = require("../models/Newslettermodel");
+const Model = require('../model/newsLetter');
+const router =  require('express').Router();
 
-router.post("/form",(req,res)=>{
-    const formdata = req.body;
+router.post('/add',(req,res) => { 
     console.log(req.body);
-    // res.send("request processed in user router");
 
-    //create opertion
-    new Model(formdata)
-    .save()
+    new Model(req.body).save()
     .then((result) => {
-        console.log("data saved");
+        console.log(result);
+        console.log('data saved');
         res.json(result);
+
     }).catch((err) => {
-        console.error("error");
+        console.error(err);
+        res.json(err);
+
+    });
+
+})
+
+router.get('/getall', (req, res) => {
+Model.find({})
+    .then((result) => {
+        console.log(result);
+        setTimeout(() => {
+            res.json(result);
+            
+        }, 2500);
+       
+
+    }).catch((err) => {
+        console.error(err);
+        res.json(err);
+
+    });
+// res.send('response achieved ')
+});
+
+router.get('/checkemail/:email', (req, res) => {
+
+// to fetch client data from get request
+console.log(req.params.email);
+
+Model.findOne({ email: req.params.email })
+    .then((result) => {
+        console.log(result);
+        res.json(result);
+
+    }).catch((err) => {
+        console.error(err);
         res.json(err);
     });
-});
+})
 
-//this is used for feched all user data
-router.get("/getall", (req, res) => {
-  Model.find({})
+router.get('/getbyid/:id', (req, res) => {
+Model.findById(req.params.id)
     .then((result) => {
-      console.log("user data fetched");
-      res.json(result);
-    })
-    .catch((err) => {
-      console.error("error");
-      res.json(err);
+        res.json(result);
+
+
+    }).catch((err) => {
+        console.error(err);
+        res.json(err);
+
     });
-});
+})
+
+router.delete('/delete/:userid', (req, res) => {
+Model.findByIdAndDelete(req.params.userid)
+    .then((result) => {
+        res.json(result);
+
+    }).catch((err) => {
+        console.error(err);
+        res.json(err);
+
+    });
+})
+
+router.put('/update/:userid', (req, res) => {
+Model.findByIdAndUpdate(req.params.userid, req.body, {new :true})
+    .then((result) => {
+        res.json(result);
+
+    }).catch((err) => {
+        console.error(err);
+        res.json(err);
+
+    });
+})
 
 
-
-module.exports= router;
+module.exports = router;

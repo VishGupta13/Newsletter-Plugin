@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import Swal from 'sweetalert2';
-import { Button} from "@mui/material";
-import UpdateUser from './UpdateUser';
+import { Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import UpdateUser from "./UpdateUser";
 
-const UserManager = () => {
-    const [userArray, setUserArray] = useState([]);
+const SubscriberManager = () => {
+  const [userArray, setUserArray] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [updateFormData, setUpdateFormData] = useState(null);
 
+  const [letterContent, setLetterContent] = useState("");
+  const [subject, setSubject] = useState("");
+
   const getDataFromBackend = async () => {
     setLoading(true);
 
-    const response = await fetch("http://localhost:5000/user/getall");
+    const response = await fetch("http://localhost:5000/subs/getall");
     const data = await response.json();
 
     console.log(data);
@@ -24,7 +27,7 @@ const UserManager = () => {
   const deleteUser = async (id) => {
     console.log(id);
 
-    const response = await fetch("http://localhost:5000/user/delete/" + id, {
+    const response = await fetch("http://localhost:5000/subs/delete/" + id, {
       method: "Delete",
     });
     if (response.status === 200) {
@@ -47,6 +50,34 @@ const UserManager = () => {
   useEffect(() => {
     getDataFromBackend();
   }, []);
+
+  const sendMail = async (recAddress) => {
+    const res = await fetch('http://localhost:5000/util/sendmail', {
+      method : 'POST',
+      body : JSON.stringify({
+        from: "vishgupta130701@gmail.com", // sender address
+        to: recAddress, // list of receivers
+        subject: subject,
+        html : letterContent
+      }),
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    })
+
+    console.log(res);
+  }
+
+  const sendNewsLetter = () => {
+    userArray.forEach(({email}) => {
+      console.log('mail sent to '+email);
+      sendMail(email);
+    })
+  }
+
+  const copyText = (text) => {
+    navigator.clipboard.writeText(text);
+  }
 
   const displayUser = () => {
     if (loading) {
@@ -71,23 +102,22 @@ const UserManager = () => {
         </div>
       );
     } else {
-      return userArray.map(({ _id, firstname, lastname, email,password }) => (
+      return userArray.map(({ _id, fname, email }) => (
         <tr key={_id}>
-          <td>{firstname}</td>
-          <td>{lastname}</td>
+          <td>{fname}</td>
           <td>{email}</td>
-          <td>{password}</td>
           <td>
             <Button
               className="btn btn-primary"
-              onClick={(e) => updateUser({ _id, firstname, lastname, email,password })}
+              onClick={(e) => updateUser({ _id, fname, email })}
             >
               {" "}
               <i class="fas fa-pen-nib"></i>
             </Button>
           </td>
           <td>
-            <Button className="btn btn-danger" onClick={(e) => deleteUser(_id)}>
+            <Button className="btn btn-danger"
+             onClick={(e) => deleteUser(_id)}>
               <i class="fas fa-trash"></i>{" "}
             </Button>
           </td>
@@ -97,16 +127,14 @@ const UserManager = () => {
   };
   return (
     <div>
-      <h1 className="text-center">User Manager</h1>
+      <h1 className="text-center">Subscriber Manager</h1>
       <div className="row">
         <div className="col-md">
           <table className="table table-dark">
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Full Name</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -114,21 +142,18 @@ const UserManager = () => {
             <tbody>{displayUser()}</tbody>
           </table>
         </div>
-        {showUpdateForm ? (
-          <div className="col-md">
-            <UpdateUser
-              updateFormData={updateFormData}
-              setShowUpdateForm={setShowUpdateForm}
-              getDataFromBackend={getDataFromBackend}
-            />
-          </div>
-        ) : (
-          " "
-        )}
+        
+      </div>
+
+      <div className='card mt-5'>
+        <div className='card-body'>
+          <input className='form-control' onChange={e => setSubject(e.target.value)}  />
+          <textarea className='form-control mt-4' rows="10" onChange={e => setLetterContent(e.target.value)}  ></textarea>
+          <button className='btn btn-primary mt-4' onClick={sendNewsLetter}>Send</button>
+        </div>
       </div>
     </div>
   );
 };
 
-
-export default UserManager;
+export default SubscriberManager;

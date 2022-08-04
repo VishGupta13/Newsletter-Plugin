@@ -2,7 +2,7 @@ const express= require("express");
 const router = express.Router();
 const Model = require("../models/usermodel");
 
-router.post("/news",(req,res)=>{
+router.post("/add",(req,res)=>{
     const formdata = req.body;
     console.log(req.body);
     // res.send("request processed in user router");
@@ -32,26 +32,69 @@ router.get("/getall", (req, res) => {
     });
 });
 
-// for login page
-router.post( '/authenticate', (req, res) => {
-  const formdata = req.body;
+router.get("/checkemail/:email", (req, res) => {
+  // to fetch client data from get request
+  console.log(req.params.email)
 
-  // to find the first entry 
-  Model.findOne({email : formdata.email, password : formdata.password})
-  .then((userdata) => {
-    if(userdata){
-      console.log('login success');
-      res.status(200).json(userdata);
-    }else{
-      console.log('login failed');
-      res.status(300).json({loginStatus : false})
-    }
-  }).catch((err) => {
-    console.error(err);
-    res.json(err);
-  });
+  Model.findOne({ email: req.params.email })
+    .then((result) => {
+      console.log(result)
+      res.json(result)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.json(err)
+    })
 })
 
+router.get("/getbyid/:id", (req, res) => {
+  Model.findById(req.params.id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.json(err)
+    })
+})
 
+router.delete("/delete/:userid", (req, res) => {
+  Model.findByIdAndDelete(req.params.userid)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.json(err)
+    })
+})
+
+router.put("/update/:userid", (req, res) => {
+  Model.findByIdAndUpdate(req.params.userid, req.body, { new: true })
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.json(err)
+    })
+})
+
+router.post('/authenticate', (req, res) => {
+  const formdata = req.body;
+  Model.findOne({email: formdata.email, password: formdata.password})
+  .then((result) => {
+      console.log(result);
+      if(result) {
+          console.log('login success');
+          res.json(result);
+      }
+      else {
+          console.log('login failed');
+          res.status(400).json({message: 'login failed'});
+      }
+      
+})
+})
 
 module.exports= router;

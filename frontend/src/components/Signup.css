@@ -1,0 +1,42 @@
+.background-c {
+    background-color: hsl(76, 96%, 73%);
+
+    
+    background-size: cover;
+}
+
+
+  .bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+  }
+  .display-5{
+    color: white ;
+  }
+  .opacity-70{
+    color: beige;
+  }
+
+  .wordcolor {
+    color: black;
+  }
+
+  .background{
+    background-color: blue;
+  }
+  .segement{
+    height:400px;
+    width: 400px;
+  }
+  .scrollable-div {
+    background-color: #f1f1f1;
+    height: 100%;
+    overflow: auto;
+    margin: 20px;
+    text-align: justify;
+    padding: 20px;
+  }
+
+  .bh{
+    overflow:auto;
+   }
