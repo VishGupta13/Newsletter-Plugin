@@ -13,10 +13,12 @@ const SubscriberManager = () => {
   const [letterContent, setLetterContent] = useState("");
   const [subject, setSubject] = useState("");
 
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+
   const getDataFromBackend = async () => {
     setLoading(true);
 
-    const response = await fetch("http://localhost:5000/subs/getall");
+    const response = await fetch("http://localhost:5000/subs/getbyowner/"+currentUser._id);
     const data = await response.json();
 
     console.log(data);
@@ -75,8 +77,8 @@ const SubscriberManager = () => {
     })
   }
 
-  const copyText = (text) => {
-    navigator.clipboard.writeText(text);
+  const copyText = () => {
+    navigator.clipboard.writeText(currentUser._id);
   }
 
   const displayUser = () => {
@@ -126,8 +128,21 @@ const SubscriberManager = () => {
     }
   };
   return (
-    <div>
-      <h1 className="text-center">Subscriber Manager</h1>
+    <div className="container pt-5">
+      <div className="card">
+        <div className="card-header">
+          <h4 className="m-0">Your Account</h4>
+        </div>
+        <div className="card-body">
+            <div className="input-group">
+
+              <span class="input-group-text" >Your Plugin Key</span>
+              <input type="text" className="form-control" value={currentUser._id} />
+              <button className="btn btn-outline-primary" onClick={copyText}>Copy Key</button>
+            </div>
+        </div>
+      </div>
+      <h1 className="text-center mt-5">Subscriber Manager</h1>
       <div className="row">
         <div className="col-md">
           <table className="table table-dark">

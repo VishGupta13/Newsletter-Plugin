@@ -2,7 +2,7 @@ const {Schema, model, Types} = require('../connection');
 
 const myschema = new Schema({
     owner:{type : Types.ObjectId, ref : 'users'},
-    fname:String,
+    name:String,
     email : String,
     createdAt : Date
 });

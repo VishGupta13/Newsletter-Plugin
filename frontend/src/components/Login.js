@@ -24,7 +24,7 @@ const Login1 = () => {
           title: "Wellcome!!👌",
           text: "Enter a new World!!",
         });
-        navigate("/home");
+        navigate("/subscribermanager");
         const data = await res.json();
         sessionStorage.setItem("user", JSON.stringify(data));
       } else {

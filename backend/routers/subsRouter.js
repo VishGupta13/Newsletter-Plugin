@@ -65,6 +65,19 @@ Model.findById(req.params.id)
     });
 })
 
+router.get('/getbyowner/:id', (req, res) => {
+Model.find({owner : req.params.id})
+    .then((result) => {
+        res.json(result);
+
+
+    }).catch((err) => {
+        console.error(err);
+        res.json(err);
+
+    });
+})
+
 router.delete('/delete/:userid', (req, res) => {
 Model.findByIdAndDelete(req.params.userid)
     .then((result) => {

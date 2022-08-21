@@ -11,7 +11,7 @@ app.use(express.json());
 
 // use to connect the frontend to backend 
 
-app.use(cors({origin:'http://localhost:3000'}));
+app.use(cors({origin:['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500']}));
 
 app.use('/user',userRouter);
 app.use('/subs',subsRouter);
@@ -21,6 +21,8 @@ app.use('/util',utilRouter);
 app.get('/home',(req,res)=>{
     res.send('Namaste Duniyaaa!');
 })
+
+app.use(express.static('./static/resources'))
 
 app.listen(port, ()=>{
     

@@ -5,7 +5,7 @@ import './Plugin.css';
 import { Formik } from "formik";
 
 
-const Plugin = () => {
+const Plugin = ({ownerId}) => {
   // const navigate = useNavigate();
   const userSubmit = async (formdata) => {
     console.log(formdata);
@@ -49,45 +49,47 @@ const Plugin = () => {
       <Formik initialValues={{
         name: '',
         email: '',
+        owner: ownerId,
+        createdAt : new Date()
       }}
-      onSubmit = {userSubmit}
+        onSubmit={userSubmit}
       >
-        {({values,handleChange, handleSubmit}) => (
+        {({ values, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-        
-       
-        <img src="https://icon-library.com/images/email-png-icon/email-png-icon-9.jpg" alt="" className="logo"/>
-        <Button></Button>
-        <h1 className="text-center t">Newsletter</h1>
-        <h5 className="mt-4 text-center  t1">Stay tuned with upto date with our latest news and products</h5>
 
-        <TextField 
-        className="w-100 mt-4 myinput" 
-        id="fname" 
-        label="Full Name"
-        onChange={handleChange}
-        value={values.fname}
-        />
-        <TextField 
-        className="w-100 mt-4 myinput" 
-        id="email" 
-        label="Email" 
-        type="email"
-        onChange={handleChange}
-        value={values.email}
-        />
-        <Button 
-        type="Submit" 
-        variant="contained" 
-        className="mt-4 w-100 mybtn"
-        >
-          Subscribe
-        </Button>
-        <h5 className="mt-3 text-muted text-center">Your Email is safe with us, we don't spam</h5>
-        </form>
+
+            <img src="https://icon-library.com/images/email-png-icon/email-png-icon-9.jpg" alt="" className="logo" />
+            <Button></Button>
+            <h1 className="text-center t">Newsletter</h1>
+            <h5 className="mt-4 text-center  t1">Stay tuned with upto date with our latest news and products</h5>
+
+            <TextField
+              className="w-100 mt-4 myinput"
+              id="name"
+              label="Full Name"
+              onChange={handleChange}
+              value={values.name}
+            />
+            <TextField
+              className="w-100 mt-4 myinput"
+              id="email"
+              label="Email"
+              type="email"
+              onChange={handleChange}
+              value={values.email}
+            />
+            <Button
+              type="Submit"
+              variant="contained"
+              className="mt-4 w-100 mybtn"
+            >
+              Subscribe
+            </Button>
+            <h5 className="mt-3 text-muted text-center">Your Email is safe with us, we don't spam</h5>
+          </form>
         )}
-        </Formik>
-        
+      </Formik>
+
     </div>
   )
 }
