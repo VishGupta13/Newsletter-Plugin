@@ -11,8 +11,8 @@ router.post("/add",(req,res)=>{
     new Model(formdata)
     .save()
     .then((result) => {
-        console.log("data saved");
-        res.json(result);
+        console.log(result);
+        res.json(200);
     }).catch((err) => {       
         console.error("error");
         res.json(err);
