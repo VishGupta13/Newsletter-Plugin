@@ -24,9 +24,9 @@ const Login1 = () => {
           title: "Wellcome!!👌",
           text: "Enter a new World!!",
         });
-        navigate("/subscribermanager");
         const data = await res.json();
         sessionStorage.setItem("user", JSON.stringify(data));
+        navigate("/subscribermanager");
       } else {
         console.log("Login error ");
         Swal.fire({

@@ -104,14 +104,14 @@ const SubscriberManager = () => {
         </div>
       );
     } else {
-      return userArray.map(({ _id, fname, email }) => (
+      return userArray.map(({ _id, name, email }) => (
         <tr key={_id}>
-          <td>{fname}</td>
+          <td>{name}</td>
           <td>{email}</td>
           <td>
             <Button
               className="btn btn-primary"
-              onClick={(e) => updateUser({ _id, fname, email })}
+              onClick={(e) => updateUser({ _id, name, email })}
             >
               {" "}
               <i class="fas fa-pen-nib"></i>

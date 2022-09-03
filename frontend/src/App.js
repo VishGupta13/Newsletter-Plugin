@@ -28,7 +28,7 @@ import Subscribe from "./components/Subscribe";
 import Plugin from "./components/Plugin";
 import Header from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SubscriberManager from "./components/SubscriberManager.js";
+import SubscriberManager from "./components/SubscriberManager";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import UserManager from "./components/UserManager";
